@@ -1,58 +1,139 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="login-container">
+    <header class="header">
+      <button class="back-button" @click="goBack">×</button>
+      <h1>登录</h1>
+    </header>
+    <div class="welcome-message">
+      <h2>您好，<br>欢迎登录使用</h2>
+    </div>
+    <form @submit.prevent="handleLogin" class="login-form">
+      <label for="phone">手机号</label>
+      <input v-model="phone" type="text" id="phone" placeholder="请输入您的手机号" />
+      
+      <label for="password">密码</label>
+      <input v-model="password" type="password" id="password" placeholder="请输入您的密码" />
+      
+      <a href="#" class="forgot-password" @click.prevent="forgotPassword">忘记密码</a>
+      
+      <button type="submit" class="login-button">登录</button>
+      <button type="button" class="download-button" @click="downloadApp">APP下载</button>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  data() {
+    return {
+      phone: '',
+      password: ''
+    };
+  },
+  methods: {
+    goBack() {
+      // 处理返回操作
+      console.log("返回上一页");
+    },
+    handleLogin() {
+      // 登录逻辑处理
+      if (this.phone && this.password) {
+        console.log("手机号:", this.phone);
+        console.log("密码:", this.password);
+        alert("登录成功！");
+      } else {
+        alert("请输入手机号和密码！");
+      }
+    },
+    forgotPassword() {
+      // 忘记密码处理
+      alert("跳转到忘记密码页面");
+    },
+    downloadApp() {
+      // 下载APP处理
+      alert("跳转到APP下载页面");
+    }
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
+* {
+  margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin: auto;
 }
-a {
-  color: #42b983;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.welcome-message h2 {
+  font-size: 24px;
+  color: #4CAF50;
+  margin: 20px 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.forgot-password {
+  text-align: right;
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.login-button, .download-button {
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-button {
+  background-color: #4CAF50;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.download-button {
+  background-color: #e0e0e0;
+  color: #333;
 }
 </style>
